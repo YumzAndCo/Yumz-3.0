@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import styles from './stylesheets/styles.css';
+import './stylesheets/styles.css';
 import { Login } from './pages/Login.jsx';
 import { Signup } from './pages/Signup.jsx';
 import { Reviews } from './pages/Reviews.jsx';
@@ -12,7 +12,6 @@ import DetailsModal from './components/DetailsModal.jsx';
 import NewRestaurant from './pages/NewRestaurant.jsx';
 import {useNavigate} from 'react-router-dom';
 import helperFns from './helperFns.js';
-import { lazy, Suspense } from 'react';
 
 
 

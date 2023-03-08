@@ -1,7 +1,7 @@
 import React from 'react';
 import MainNavItem from './MainNavItem.jsx';
 import { faBurger, faMugHot, faHeart } from '@fortawesome/free-solid-svg-icons';
-import styles from '../stylesheets/main-nav.css';
+import '../stylesheets/main-nav.css';
 import { useNavigate } from 'react-router-dom';
 
 const MainNav = props => {

@@ -2,7 +2,7 @@ import React from 'react';
 import RatingsTable from './RatingsTable.jsx';
 import RestaurantInfo from './RestaurantInfo.jsx';
 import RatingNotes from './RatingNotes.jsx';
-import styles from '../stylesheets/details-modal.css';
+import '../stylesheets/details-modal.css';
 
 const DetailsModal = props => {
 

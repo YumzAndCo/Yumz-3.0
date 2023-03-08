@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../stylesheets/restaurant-search-result.css';
+import '../stylesheets/restaurant-search-result.css';
 
 const RestaurantSearchResult = props => {
   return (

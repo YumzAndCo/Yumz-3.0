@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../stylesheets/rating-notes.css';
+import '../stylesheets/rating-notes.css';
 
 const RatingNotes = props => {
   return (

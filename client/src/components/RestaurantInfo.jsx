@@ -1,7 +1,7 @@
 import React from 'react';
 import Detail from './Detail.jsx';
 import DetailsTable from './DetailsTable.jsx';
-import styles from '../stylesheets/details-modal.css';
+import '../stylesheets/details-modal.css';
 import { faLocationDot, faCircleInfo, faPhone, faTruckFast, faShirt, faCar } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faCreditCard, faFileLines } from '@fortawesome/free-regular-svg-icons';
 

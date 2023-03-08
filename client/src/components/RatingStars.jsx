@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as hollowStar } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from '../stylesheets/rating-stars.css';
+import '../stylesheets/rating-stars.css';
 
 const RatingStars = props => {
   const [numFilledStars, setNumFilledStars] = useState(0);

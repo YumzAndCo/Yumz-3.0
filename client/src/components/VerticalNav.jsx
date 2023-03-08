@@ -1,7 +1,7 @@
 import React from 'react';
 import VerticalNavItem from './VerticalNavItem.jsx';
 import { faPlus, faFaceSmile, faBook } from '@fortawesome/free-solid-svg-icons';
-import styles from '../stylesheets/vertical-nav.css';
+import '../stylesheets/vertical-nav.css';
 import { useNavigate } from 'react-router-dom';
 
 const VerticalNav = props => {
