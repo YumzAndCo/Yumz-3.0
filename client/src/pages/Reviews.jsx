@@ -28,7 +28,7 @@ export const Reviews = () => {
   //       .then(data => setListItems(data));
   //   }
   //   fetchReviews();
-  // });
+  // }, []);
   return (
     <CollectionList restaurants={listItems} listName="Reviews"/>
   );

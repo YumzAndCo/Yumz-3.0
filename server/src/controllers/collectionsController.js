@@ -51,10 +51,10 @@ collectionsController.getWishlist = async (req, res, next) => {
 collectionsController.addToFavorites = async (req, res, next) => {
   const collectionID = req.cookies.favorites;
   const restaurantID = res.locals.restID;
-  const restaurantName = res.locals.restName;
+  // const restaurantName = res.locals.restName;
   const newFavoritesItem = await db.query(
-    `INSERT INTO collection_restaurant (collection_id, restaurant_id, name) 
-    VALUES ('${collectionID}', '${restaurantID}', '${restaurantName}')
+    `INSERT INTO collection_restaurant (collection_id, restaurant_id) 
+    VALUES ('${collectionID}', '${restaurantID}')
     RETURNING *;`
   );
   res.locals.newFavoritesItem = newFavoritesItem;
@@ -65,10 +65,10 @@ collectionsController.addToWishlist = async (req, res, next) => {
   try {
     const collectionID = req.cookies.wishlist;
     const restaurantID = res.locals.restID;
-    const restaurantName = res.locals.restName;
+    // const restaurantName = res.locals.restName;
     const newWishlistItem = await db.query(
-      `INSERT INTO collection_restaurant (collection_id, restaurant_id, name) 
-      VALUES ('${collectionID}', '${restaurantID}', '${restaurantName}')
+      `INSERT INTO collection_restaurant (collection_id, restaurant_id) 
+      VALUES ('${collectionID}', '${restaurantID}')
       RETURNING *;`
     );
     res.locals.newWishlistItem = newWishlistItem;
@@ -86,10 +86,10 @@ collectionsController.addToReviews = async (req, res, next) => {
   try {
     const collectionID = req.cookies.reviews;
     const restaurantID = res.locals.restID;
-    const restaurantName = res.locals.restName;
+    // const restaurantName = res.locals.restName;
     const newReviewItem = await db.query(
-      `INSERT INTO collection_restaurant (collection_id, restaurant_id, name) 
-      VALUES ('${collectionID}', '${restaurantID}', '${restaurantName}')
+      `INSERT INTO collection_restaurant (collection_id, restaurant_id) 
+      VALUES ('${collectionID}', '${restaurantID}')
       RETURNING *;`
     );
     res.locals.newReviewItem = newReviewItem;

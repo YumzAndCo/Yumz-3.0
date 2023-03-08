@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const NewRestaurant = props => {
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   const [searchResults, setSearchResults] = useState({});
+  const [showReview, setShowReview] = useState(false);
 
   const navigate = useNavigate();
 
@@ -104,6 +105,7 @@ const NewRestaurant = props => {
   const onFinishBtnClick = () => {
     console.log('Finish button clicked');
     // TO DO - post request to /restaurant
+    //app.post('/addToWishlist' post request with newRestaurantInfo as body
   };
 
   const onReturnSearchBtnClick = () => {
@@ -186,16 +188,23 @@ const NewRestaurant = props => {
       <div id='new-restaurant-info'>
         <div id="restaurant-name">{restaurantInfo.name}</div>
         <RestaurantInfo info={restaurantInfo} />
-        <div className="section-header">
-          <span>Ratings</span>
-        </div>
-        <RatingsTable />
-        <div className="section-header">
-          <span>Notes</span>
-        </div>
-        <RatingNotes
-          buttonText='Finish'
-          clickHandler={onFinishBtnClick} />
+        <button>Add to Wishlist</button>
+        <button>Add to Favorites</button>
+        <button onClick = {() => setShowReview(!showReview)}>Add Review</button>
+        {showReview &&
+        <>
+          <div className="section-header">
+            <span>Ratings</span>
+          </div>
+          <RatingsTable />
+          <div className="section-header">
+            <span>Notes</span>
+          </div>
+          <RatingNotes
+            buttonText='Finish'
+            clickHandler={onFinishBtnClick} />
+        </>
+        }
       </div>
     );
   }
