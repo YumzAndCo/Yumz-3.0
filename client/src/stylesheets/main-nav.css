@@ -9,16 +9,19 @@
 #main-nav-reviews {
   background-color: #EAD9EB;
   border: 1px solid #e2c7e3;
+  cursor: pointer;
 }
 
 #main-nav-wishlist {
   background-color: #C09EF4;
   border: 1px solid #aa8cd7;
+  cursor: pointer;
 }
 
 #main-nav-favorites {
   background-color: #FD7F32;
   border: 1px solid #e97229;
+  cursor: pointer;
 }
 
 .main-nav-btn {
@@ -34,11 +37,16 @@
   transition-timing-function: ease-in-out;
   font-family: 'Fredoka One', cursive;
   letter-spacing: .3rem;
+  cursor: pointer;
 }
 
 .main-nav-btn:hover {
   transform: scale(1.01);
   filter: brightness(97%);
+}
+
+.main-nav-btn:active {
+  transform: scale(0.97);
 }
 
 .main-nav-icon {
