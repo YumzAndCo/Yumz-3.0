@@ -55,22 +55,22 @@ app.delete('/api/logout', sessionController.deleteSession, (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/addToWishlist', restaurantController.addRestaurant,
+app.post('/api/addToWishlist', restaurantController.addRestaurant,
   collectionsController.addToWishlist, (req, res) => {
     res.status(200).json(res.locals.newWishlistItem);
   });
 
-// app.post('/addToFavorites', restaurantController.addRestaurant, collectionsController.addToFavorites, (req, res) => {
+// app.post('/api/addToFavorites', restaurantController.addRestaurant, collectionsController.addToFavorites, (req, res) => {
 //   res.status(200);
 //   res.send(res.locals);
 // });
 
-app.post('/addToReviews', restaurantController.addRestaurant,
+app.post('/api/addToReviews', restaurantController.addRestaurant,
   collectionsController.addToReviews, (req, res) => {
     res.status(200).json(res.locals.newReviewItem);
   });
 
-// app.get('/reviews', collectionsController.getReviews, (req, res) => {
+// app.get('/api/reviews', collectionsController.getReviews, (req, res) => {
 //   res.status(200).send()
 // })
 
