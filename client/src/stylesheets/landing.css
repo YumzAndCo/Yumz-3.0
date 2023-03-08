@@ -1,0 +1,8 @@
+#landing {
+  background-color: #FCF9E8;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 7rem auto;
+  grid-template-rows: 8rem auto;
+}

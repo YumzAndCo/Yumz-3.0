@@ -1,0 +1,46 @@
+#main-nav {
+  grid-column-start: 2;
+  display: flex;
+  gap: 5vw;
+  justify-content: center;
+  padding-top: 7rem;
+}
+
+#main-nav-reviews {
+  background-color: #EAD9EB;
+  border: 1px solid #e2c7e3;
+}
+
+#main-nav-wishlist {
+  background-color: #C09EF4;
+  border: 1px solid #aa8cd7;
+}
+
+#main-nav-favorites {
+  background-color: #FD7F32;
+  border: 1px solid #e97229;
+}
+
+.main-nav-btn {
+  width: 25vw;
+  height: 16rem;
+  font-size: 2.5rem;
+  border-radius: 10px;
+  color: #474747;
+  line-height: 4.5rem;
+  box-shadow: 1px 1px 10px rgba(67, 67, 67, 0.2);
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  font-family: 'Fredoka One', cursive;
+  letter-spacing: .3rem;
+}
+
+.main-nav-btn:hover {
+  transform: scale(1.01);
+  filter: brightness(97%);
+}
+
+.main-nav-icon {
+  font-size: 5rem;
+}

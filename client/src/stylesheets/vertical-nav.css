@@ -1,0 +1,24 @@
+#vertical-nav {
+  grid-row-start: 1;
+  grid-row-end: span 2;
+  width: 5rem;
+  padding-top: 2rem;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  background-color: #5D325D;
+}
+
+.vertical-nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #EAD9EB;
+  font-size: 2rem;
+}
+
+.vertical-nav-btn:hover {
+  color: #DABCDC;
+}

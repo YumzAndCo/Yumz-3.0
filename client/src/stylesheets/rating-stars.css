@@ -1,0 +1,7 @@
+.rating-star {
+  font-size: 2rem;
+}
+
+.rating-star:hover {
+  cursor: pointer;
+}

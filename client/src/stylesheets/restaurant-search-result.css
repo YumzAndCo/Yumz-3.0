@@ -1,0 +1,16 @@
+.restaurant-search-result {
+  background-color: #f3ebff;
+  border: 5px solid #aa8cd7;
+  padding: 1.5rem 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.restaurant-search-result:hover {
+  background-color: #e6d8fc;
+}
+
+.search-result-name {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
