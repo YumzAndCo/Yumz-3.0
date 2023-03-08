@@ -20,6 +20,15 @@ cookieController.setJWTCookie = async (req, res, next) => {
     res.cookie('ssid', res.locals.user.user_id, {
       httpOnly: true
     });
+    res.cookie('favorites', res.locals.collections.userFavorites.id, {
+      httpOnly: true
+    });
+    res.cookie('wishlist', res.locals.collections.userWishlist.id, {
+      httpOnly: true
+    });
+    res.cookie('reviews', res.locals.collections.userReviews.id, {
+      httpOnly: true
+    });
     return next();
   } 
   catch (error) {

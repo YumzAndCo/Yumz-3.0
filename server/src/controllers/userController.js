@@ -22,6 +22,16 @@ userController.verifyUser = async (req, res, next) => {
     // console.log('email: ', email,  'password : ', password)
     
     const queryResult = await db.query(`SELECT * FROM users WHERE email = '${email}';`);
+    const collections = await db.query(`SELECT * FROM collection
+    WHERE user_id = ${queryResult.rows[0].user_id};`);
+
+    console.log(collections.rows);
+    
+    const collection = {
+      userFavorites: collections.rows[0],
+      userWishlist: collections.rows[1],
+      userReviews: collections.rows[2]
+    };
 
     if (queryResult.rows[0] === undefined) {
       res.locals.status = 300;
@@ -35,7 +45,9 @@ userController.verifyUser = async (req, res, next) => {
           if (!result) res.locals.status = 300;
           else {
             res.locals.user = queryResult.rows[0];
+            res.locals.collections = collection;
             // console.log('HERE',res.locals.user);
+            // res.locals.collections
             return next();
           }
         });
@@ -95,24 +107,27 @@ userController.createUser = async (req, res, next) => {
         
     
         //creating three new instances of Collections based on that user's userID
-        await db.query(
+        const userFavorites = await db.query(
           `INSERT INTO collection (user_id, name)
-          VALUES ('${userID}', 'favorites');`
+          VALUES ('${userID}', 'favorites')
+          RETURNING *;`
         );
     
-        await db.query(
+        const userWishlist = await db.query(
           `INSERT INTO collection (user_id, name)
-          VALUES ('${userID}', 'wishlist');`
+          VALUES ('${userID}', 'wishlist')
+          RETURNING *;`
         );
     
-        await db.query(
+        const userReviews = await db.query(
           `INSERT INTO collection (user_id, name)
-          VALUES ('${userID}', 'reviews');`
+          VALUES ('${userID}', 'reviews')
+          RETURNING *;`
         );
     
-        const userFavorites = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'favorites'`);
-        const userWishlist = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'wishlist'`);
-        const userReviews = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'reviews'`);
+        // const userFavorites = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'favorites'`);
+        // const userWishlist = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'wishlist'`);
+        // const userReviews = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'reviews'`);
     
         const collections = {
           userFavorites: userFavorites,

@@ -1,13 +1,13 @@
 const { query } = require('express');
 const db = require('../models/userModels.js');
 
-// const createError = (errorInfo) => {
-//   const {method, type, error} = errorInfo;
-//   return {
-//     log: `userController.${method} ${type}: ERROR: ${typeof error === 'object' ? JSON.stringify(error):error}`,
-//     message: {err: `error occurreed in userController.${method}. Check server logs for more details.`}
-//   };
-// };
+const createError = (errorInfo) => {
+  const {method, type, error} = errorInfo;
+  return {
+    log: `userController.${method} ${type}: ERROR: ${typeof error === 'object' ? JSON.stringify(error):error}`,
+    message: {err: `error occurreed in userController.${method}. Check server logs for more details.`}
+  };
+};
 
 const collectionsController = {};
 
@@ -49,27 +49,58 @@ collectionsController.getWishlist = async (req, res, next) => {
 };
 
 collectionsController.addToFavorites = async (req, res, next) => {
-  const collectionID = req.body.collection_id;
+  const collectionID = req.cookies.favorites;
   const restaurantID = res.locals.restID;
-  await db.query(
-    `INSERT INTO collection_restaurant (collection_id, restaurant_id) 
-    VALUES ('${collectionID}', '${restaurantID}')`
+  const restaurantName = res.locals.restName;
+  const newFavoritesItem = await db.query(
+    `INSERT INTO collection_restaurant (collection_id, restaurant_id, name) 
+    VALUES ('${collectionID}', '${restaurantID}', '${restaurantName}')
+    RETURNING *;`
   );
+  res.locals.newFavoritesItem = newFavoritesItem;
   return next();
 };
 
 collectionsController.addToWishlist = async (req, res, next) => {
-  const collectionID = req.body.collection_id;
-  const restaurantID = res.locals.restID;
-  await db.query(
-    `INSERT INTO collection_restaurant (collection_id, restaurant_id) 
-    VALUES ('${collectionID}', '${restaurantID}')`
-  );
-  return next();
+  try {
+    const collectionID = req.cookies.wishlist;
+    const restaurantID = res.locals.restID;
+    const restaurantName = res.locals.restName;
+    const newWishlistItem = await db.query(
+      `INSERT INTO collection_restaurant (collection_id, restaurant_id, name) 
+      VALUES ('${collectionID}', '${restaurantID}', '${restaurantName}')
+      RETURNING *;`
+    );
+    res.locals.newWishlistItem = newWishlistItem;
+    return next();
+  } catch(error){
+    return next(createError({
+      log: `error in addToWishList, ${error}`,
+      message: 'error in addToWishList',
+      error
+    }));
+  }
 };
 
 collectionsController.addToReviews = async (req, res, next) => {
-  
+  try {
+    const collectionID = req.cookies.reviews;
+    const restaurantID = res.locals.restID;
+    const restaurantName = res.locals.restName;
+    const newReviewItem = await db.query(
+      `INSERT INTO collection_restaurant (collection_id, restaurant_id, name) 
+      VALUES ('${collectionID}', '${restaurantID}', '${restaurantName}')
+      RETURNING *;`
+    );
+    res.locals.newReviewItem = newReviewItem;
+    return next();
+  } catch(error){
+    return next(createError({
+      log: `error in addToReviews, ${error}`,
+      message: 'error in addToReviews',
+      error
+    }));
+  }
 };
 
 /*
@@ -92,3 +123,5 @@ const body = {
     };
 
 */ 
+
+module.exports = collectionsController;
