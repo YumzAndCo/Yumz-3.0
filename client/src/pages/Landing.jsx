@@ -14,14 +14,17 @@ const Landing = props => {
   //   navigate('/login');
     
   // });
-  useEffect(async () => {
-    const response = await fetch('/session');
-    if (response.ok){
-      return;
+  useEffect(() => {
+    async function fetchSession() {
+      const response = await fetch('/api/session');
+      if (response.ok){
+        return;
+      }
+      else{
+        return navigate('/');
+      }
     }
-    else{
-      return navigate('/');
-    }
+    fetchSession();
   }, []);
 
   return (

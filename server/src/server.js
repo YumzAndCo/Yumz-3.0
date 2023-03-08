@@ -50,6 +50,11 @@ app.get('/api/session', sessionController.isLoggedIn, (req, res) => {
   res.sendStatus(200);
 });
 
+//route for logging out - deletes session from database
+app.delete('/api/logout', sessionController.deleteSession, (req, res) => {
+  res.sendStatus(200);
+});
+
 // app.post('/addToWishlist', restaurantController.addRestaurant, collectionsController.addToWishlist, (req, res) => {
 //   res.status(200);
 //   res.send(res.locals);

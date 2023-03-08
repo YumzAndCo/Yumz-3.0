@@ -84,6 +84,7 @@ sessionController.deleteSession = async (req, res, next) => {
       }));
     }
     res.locals.session = session;
+    res.clearCookie('ssid');
     return next();
   } 
   catch(err) {
