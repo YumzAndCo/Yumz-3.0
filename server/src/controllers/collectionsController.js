@@ -4,7 +4,7 @@ const db = require('../models/userModels.js');
 const createError = (errorInfo) => {
   const {method, type, error} = errorInfo;
   return {
-    log: `userController.${method} ${type}: ERROR: ${typeof error === 'object' ? JSON.stringify(error):error}`,
+    log: `userController.${method} ${type}: ERROR: ${typeof error === 'object' ? JSON.stringify(error) : error}`,
     message: {err: `error occurreed in userController.${method}. Check server logs for more details.`}
   };
 };
@@ -13,24 +13,40 @@ const collectionsController = {};
 
 collectionsController.getReviews = async (req, res, next) => {
   try {
-    const {userID} = req.body;
-    const userReviews = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'reviews'`);
-  } catch(error) {
+    const userID = req.cookies.ssid;
+    const {collectionId} = req.cookies.reviews;
+    const userReviews = await db.query(`SELECT * FROM collection_restaurant 
+    FULL OUTER JOIN restaurants 
+    ON collection_restaurant.restaurant_id = restaurants.restaurant_id
+    WHERE collection_restaurant.collection_id = ${collectionId};`);
+
+    res.locals.reviews = userReviews.rows;
+
+    return next();
+  } 
+  catch(error) {
     return next({
-      log: 'an error occurred',
-      message: 'an error occurred'
+      log: `an error occurred in getReviews. ${error}`,
+      message: 'an error occurred in getReviews',
+      error
     });
   }
 };
 
 collectionsController.getFavorites = async (req, res, next) => {
   try {
-    const {userID} = req.body;
-    const userFavorites = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'favorites'`);
-  } catch(error) {
+    const userID = req.cookies.ssid;
+    const {collectionId} = req.cookies.favorites;
+    const userFavorites = await db.query(`SELECT * FROM collection_restaurant 
+    FULL OUTER JOIN restaurants 
+    ON collection_restaurant.restaurant_id = restaurants.restaurant_id
+    WHERE collection_restaurant.collection_id = ${collectionId};`);
+  } 
+  catch(error) {
     return next({
-      log: 'an error occurred',
-      message: 'an error occurred'
+      log: `an error occurred in getFavorites, ${error}`,
+      message: 'an error occurred in getFavorites',
+      error
     });
   }
 };
@@ -40,7 +56,8 @@ collectionsController.getWishlist = async (req, res, next) => {
     const {userID} = req.body;
     const userWishlist = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'wishlist'`);
 
-  } catch(error) {
+  } 
+  catch(error) {
     return next({
       log: 'an error occurred',
       message: 'an error occurred'
@@ -49,16 +66,26 @@ collectionsController.getWishlist = async (req, res, next) => {
 };
 
 collectionsController.addToFavorites = async (req, res, next) => {
-  const collectionID = req.cookies.favorites;
-  const restaurantID = res.locals.restID;
-  // const restaurantName = res.locals.restName;
-  const newFavoritesItem = await db.query(
-    `INSERT INTO collection_restaurant (collection_id, restaurant_id) 
-    VALUES ('${collectionID}', '${restaurantID}')
-    RETURNING *;`
-  );
-  res.locals.newFavoritesItem = newFavoritesItem;
-  return next();
+  try {
+    const collectionID = req.cookies.favorites;
+    const restaurantID = res.locals.restID;
+    // const restaurantName = res.locals.restName;
+    const newFavoritesItem = await db.query(
+      `INSERT INTO collection_restaurant (collection_id, restaurant_id) 
+      VALUES ('${collectionID}', '${restaurantID}')
+      RETURNING *;`
+    );
+    res.locals.newFavoritesItem = newFavoritesItem;
+    return next();
+  }
+
+  catch(error){
+    return next(createError({
+      log: `error in addToFavorites, ${error}`,
+      message: 'error in addToFavorites',
+      error
+    }));
+  }
 };
 
 collectionsController.addToWishlist = async (req, res, next) => {
@@ -73,7 +100,8 @@ collectionsController.addToWishlist = async (req, res, next) => {
     );
     res.locals.newWishlistItem = newWishlistItem;
     return next();
-  } catch(error){
+  } 
+  catch(error){
     return next(createError({
       log: `error in addToWishList, ${error}`,
       message: 'error in addToWishList',
@@ -94,7 +122,8 @@ collectionsController.addToReviews = async (req, res, next) => {
     );
     res.locals.newReviewItem = newReviewItem;
     return next();
-  } catch(error){
+  } 
+  catch(error){
     return next(createError({
       log: `error in addToReviews, ${error}`,
       message: 'error in addToReviews',

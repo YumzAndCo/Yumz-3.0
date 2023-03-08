@@ -102,10 +102,18 @@ const NewRestaurant = props => {
     }
   };
 
-  const onFinishBtnClick = () => {
+  const onFinishBtnClick = async () => {
     console.log('Finish button clicked');
     // TO DO - post request to /restaurant
     //app.post('/addToWishlist' post request with newRestaurantInfo as body
+    const restaurant = restaurantInfo;
+    const response = await fetch('/api/addToReviews', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(restaurant)
+    });
   };
 
   const onReturnSearchBtnClick = () => {

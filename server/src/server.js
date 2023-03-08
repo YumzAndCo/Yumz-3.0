@@ -70,9 +70,9 @@ app.post('/api/addToReviews', restaurantController.addRestaurant,
     res.status(200).json(res.locals.newReviewItem);
   });
 
-// app.get('/api/reviews', collectionsController.getReviews, (req, res) => {
-//   res.status(200).send()
-// })
+app.get('/api/reviews', collectionsController.getReviews, (req, res) => {
+  res.status(200).json(res.locals.reviews);
+});
 
 // app.get('/', (req, res) => {
 //   res.status(200).sendFile(path.join(__dirname, '../../client/src/index.html'));
