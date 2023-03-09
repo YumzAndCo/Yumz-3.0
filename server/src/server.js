@@ -79,13 +79,15 @@ app.get('/api/reviews', collectionsController.getReviews,
     res.status(200).json(res.locals);
   });
 
-app.get('/api/favorites', collectionsController.getFavorites, (req, res) => {
-  res.status(200).json(res.locals.favorites);
-});
+app.get('/api/favorites', collectionsController.getFavorites, 
+  ratingsController.getRating, (req, res) => {
+    res.status(200).json(res.locals.favorites);
+  });
 
-app.get('/api/wishlist', collectionsController.getWishlist, (req, res) => {
-  res.status(200).json(res.locals.wishlist);
-});
+app.get('/api/wishlist', collectionsController.getWishlist,
+  ratingsController.getRating, (req, res) => {
+    res.status(200).json(res.locals.wishlist);
+  });
 
 // app.get('/', (req, res) => {
 //   res.status(200).sendFile(path.join(__dirname, '../../client/src/index.html'));

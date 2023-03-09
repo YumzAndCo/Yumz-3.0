@@ -29,8 +29,8 @@ export const CollectionList = (props) => {
             onClick = {() => setGoToHome(true)} ><FontAwesomeIcon icon={faArrowLeft} /></button>
           <div className = "collectionTitle">{listName}</div>
         </div>
-        {restaurants.map((listing) => ( //each restautant in array, return a listitem
-          <ListItem listing={listing} key={listing.id}/>
+        {restaurants.map((listing, index) => ( //each restautant in array, return a listitem
+          <ListItem listing={listing} rating={props.ratings[index]} key={listing.id}/>
         ))}
       </div>
     </>

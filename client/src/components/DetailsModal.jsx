@@ -9,8 +9,8 @@ import { faStar as hollowStar } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DetailsModal = props => {
-  const [numFilledStars, setNumFilledStars] = useState(0);
-  const [textNotes, setTextNotes] = useState('');
+  const [numFilledStars, setNumFilledStars] = useState(props.rating.overall_score);
+  const [textNotes, setTextNotes] = useState(props.rating.notes);
 
   const onStarClick = (starId) => {
     /*

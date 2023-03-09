@@ -5,15 +5,15 @@ const restaurantController = {};
 
 restaurantController.addRestaurant = async (req, res, next) => {
   try{
-    console.log('body is', req.body);
+    // console.log('body is', req.body);
     const {name, category, hours, address, delivery, menu} = req.body;
     //check if restaurant is already stored in database by checking if restaurant_id exists
     const queryRestaurant = await db.query(`SELECT * FROM restaurants WHERE name = '${name}' AND address = '${address}'`);
     if(queryRestaurant.rowCount !== 0) {
       res.locals.restID = queryRestaurant.rows[0].restaurant_id;
       res.locals.restName = req.body.name;
-      console.log('restName', res.locals.restName);
-      console.log('restID', res.locals.restID);
+      // console.log('restName', res.locals.restName);
+      // console.log('restID', res.locals.restID);
       return next();
     } 
     else {
@@ -23,7 +23,7 @@ restaurantController.addRestaurant = async (req, res, next) => {
         VALUES ('${name}', '${category}', '${hours}', '${address}', '${delivery}', '${menu}')
         RETURNING *;`
       );
-      console.log('newRestaurant', newRestaurant);
+      // console.log('newRestaurant', newRestaurant);
       // const newRestaurant = await db.query(`SELECT * FROM restaurants WHERE name = '${name}' AND address = '${address}'`);
       res.locals.restID = newRestaurant.rows[0].restaurant_id;
       res.locals.restName = newRestaurant.rows[0].name;

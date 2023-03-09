@@ -19,15 +19,16 @@ ratingsController.addRating = async (req, res, next) => {
     console.log('restaurantID', restaurantID);
     //res.locals.restID
     
-    const date = new Date.now();
-    // console.log('req.body:', req.body);
+    // const date = new Date().toISOString();
+    // console.log('date', date);
+    console.log('req.body:', req.body);
 
     const { overall_score, notes } = req.body;
     console.log('ratings data:', overall_score + ' ' + notes);
 
     const newRating = await  db.query(
-      `INSERT INTO ratings (user_id, restaurant_id, date_last_updated, overall_score, notes) 
-        VALUES ('${userId}', '${restaurantID}', ${date}, ${overall_score}, ${notes})
+      `INSERT INTO ratings (user_id, restaurant_id, overall_score, notes) 
+        VALUES ('${userId}', '${restaurantID}', ${overall_score}, '${notes}')
         RETURNING *;`
     );
     console.log('new rating is:', newRating);
@@ -83,7 +84,25 @@ ratingsController.getRating = async (req, res, next) => {
 };
 
 ratingsController.editRating = async (req, res, next) => {
+  try {
+    const userId = req.cookies.ssid;
 
+    const restId ;
+
+    const userRatings = await db.query(`UPDATE * FROM ratings (stars, notes)
+    VALUES (${stars}, '${notes}') WHERE restaurant_id IN (${restId})`);
+
+    res.locals.ratings = userRatings.rows;
+    console.log('res.locals.ratings updated:', res.locals.ratings);
+    return next();
+
+  } catch (err) {
+    return next(createError({
+      log: `error in editRating, ${err}`,
+      message: 'error in editRating',
+      err
+    }));
+  }
 };
 
 

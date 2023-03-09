@@ -4,6 +4,7 @@ import { CollectionList } from './CollectionList.jsx';
 export const Reviews = () => {
 
   const [listItems, setListItems] = useState([]);
+  const [ratingItem, setRatingItem] = useState([]);
 
   useEffect(() => {
     function fetchReviews() {
@@ -11,7 +12,8 @@ export const Reviews = () => {
         .then(response => response.json())
         .then(data => {
           console.log('front end data is:', data);
-          setListItems(data);
+          setListItems(data.reviews);
+          setRatingItem(data.ratings);
           // console.log('list state is', listItems);
         });
     }
@@ -19,9 +21,11 @@ export const Reviews = () => {
   }, []);
 
   setTimeout(console.log('list state is', listItems), 3000);
+  setTimeout(console.log('rating state is', ratingItem), 3000);
+  
   if (listItems.length > 0){
     return (
-      <CollectionList restaurants={listItems} listName="Reviews"/>
+      <CollectionList restaurants={listItems} ratings={ratingItem} listName="Reviews"/>
     );
   }
   else{

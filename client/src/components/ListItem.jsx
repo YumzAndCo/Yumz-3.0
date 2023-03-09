@@ -12,10 +12,11 @@ const ListItem = (props) => {
 
     <div className="preview">
       <span className = "item" id="name">{props.listing.name}</span> 
-      <span className = "item" id="stars">{props.listing.rating} ☆</span>
+      <span className = "item" id="stars">{props.rating.overall_score} ☆</span>
       <span className = "item" id="cuisine">{props.listing.cuisine}</span>
       <span className = "item" id="more-info" onClick={()=> setModalStatus(true)}>More Info</span>
-      <DetailsModal show={modalStatus} restaurant = {props.listing} close={() => setModalStatus(false)} />
+      <DetailsModal show={modalStatus} restaurant = {props.listing}
+        rating = {props.rating} close={() => setModalStatus(false)} />
     </div>
 
   );
