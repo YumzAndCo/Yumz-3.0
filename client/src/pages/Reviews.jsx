@@ -1,10 +1,24 @@
 import React, { Component, useState, useEffect } from 'react';
 import { CollectionList } from './CollectionList.jsx';
+import {useNavigate} from 'react-router-dom';
 
 export const Reviews = () => {
-
+  const navigate = useNavigate();
   const [listItems, setListItems] = useState([]);
   const [ratingItem, setRatingItem] = useState([]);
+  
+  useEffect(() => {
+    async function fetchSession() {
+      const response = await fetch('/api/session');
+      if (response.ok){
+        return;
+      }
+      else{
+        return navigate('/');
+      }
+    }
+    fetchSession();
+  }, []);
 
   useEffect(() => {
     function fetchReviews() {

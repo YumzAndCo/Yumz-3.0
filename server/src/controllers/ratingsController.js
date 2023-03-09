@@ -25,14 +25,29 @@ ratingsController.addRating = async (req, res, next) => {
 
     const { overall_score, notes } = req.body;
     console.log('ratings data:', overall_score + ' ' + notes);
-
-    const newRating = await  db.query(
-      `INSERT INTO ratings (user_id, restaurant_id, overall_score, notes) 
-        VALUES ('${userId}', '${restaurantID}', ${overall_score}, '${notes}')
-        RETURNING *;`
-    );
-    console.log('new rating is:', newRating);
-    return next();
+    const userRatings = await db.query(`SELECT * FROM ratings 
+    WHERE restaurant_id = ${restaurantID} AND user_id = ${userId};`);
+    console.log(userRatings);
+    try{
+      if (userRatings.rowCount === 0){
+        console.log('IN ADD RATING')
+        const newRating = await db.query(
+          `INSERT INTO ratings (user_id, restaurant_id, overall_score, notes) 
+          VALUES ('${userId}', '${restaurantID}', ${overall_score}, '${notes}')
+          RETURNING *;`
+        );
+        console.log('new rating is:', newRating);
+        return next();
+      }
+      else{
+        return next();
+      }} catch(err){
+      return next(createError({
+        log: `error in addRating, ${err}`,
+        message: 'error in addRating',
+        err
+      }));
+    }
   } catch(err){
     return next(createError({
       log: `error in addRating, ${err}`,

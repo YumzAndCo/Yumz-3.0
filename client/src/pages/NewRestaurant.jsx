@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RestaurantInfo from '../components/RestaurantInfo.jsx';
 import RestaurantSearchResult from '../components/RestaurantSearchResult.jsx';
 import RatingsTable from '../components/RatingsTable.jsx';
@@ -16,11 +16,24 @@ import '../stylesheets/rating-stars.css';
 
 
 const NewRestaurant = props => {
-
+  const navigated = useNavigate();
   // lines 21 - 65 are from RatingsTable
   const [numFilledStars, setNumFilledStars] = useState(0);
   const [textNotes, setTextNotes] = useState('');
   const [goToHome, setGoToHome] = useState(false);
+
+  useEffect(() => {
+    async function fetchSession() {
+      const response = await fetch('/api/session');
+      if (response.ok){
+        return;
+      }
+      else{
+        return navigated('/');
+      }
+    }
+    fetchSession();
+  }, []);
 
   const onStarClick = (starId) => {
     /*
