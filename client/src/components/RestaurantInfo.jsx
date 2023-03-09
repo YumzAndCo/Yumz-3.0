@@ -20,49 +20,65 @@ const RestaurantInfo = props => {
   mainDetails.push(
     <Detail
       iconName={faCircleInfo}
-      text={props.info.category}
+      text={props.info.cuisine}
       key={2}
     />
   );
-  let hoursStr = '';
-  if (Array.isArray(props.info.hours)) {
-    props.info.hours.forEach((dayStr, index) => {
-      if (index === props.info.hours.length - 1) {
-        hoursStr += dayStr;
-      } else {
-        hoursStr += dayStr + ', ';
-      }
-    });
-  } else {
-    hoursStr = 'N/A';
-  }
+  const hoursStr = props.info.hours;
+  const hoursArr = hoursStr.split(',');
+
+  {/**
+  //REGEX for making a line break in 'Hours' at any comma:
+  .replace(/,\s?/gm, '\n')
+
+  const rawStr = props.info.hours
+  const hoursStr = rawStr.replace(/,\s?/gm, '\n')
+
+   */}
+
+
+
+
+
+  // if (Array.isArray(props.info.hours)) {
+  //   props.info.hours.forEach((dayStr, index) => {
+  //     if (index === props.info.hours.length - 1) {
+  //       hoursStr += dayStr;
+  //     } else {
+  //       hoursStr += dayStr + ', ';
+  //     }
+  //   });
+  // } else {
+  //   hoursStr = 'N/A';
+  // }
   mainDetails.push(
     <Detail
       iconName={faClock}
-      text={hoursStr}
+      text={hoursStr.replace(/,\s?/gm, '\n')}
       key={3}
     />
   );
 
+  const parkingText = props.info.parking_options ? props.info.parking_options : 'N/A';
   details['parking'] =
     <Detail
       iconName={faCar}
-      text={props.info.parking}
+      text={parkingText}
       key={4}
     />;
 
-  const deliveryTxt = props.info.delivery ? 'Offers delivery' : 'No delivery'
+  const deliveryTxt = props.info.offers_delivery ? 'Offers delivery' : 'No delivery';
   details['delivery'] =
     <Detail
       iconName={faTruckFast}
       text={deliveryTxt}
       key={5}
     />;
-
+  const dressCodeText = props.info.dress_code ? props.info.dress_code : 'N/A';
   details['dress-code'] =
     <Detail
       iconName={faShirt}
-      text={props.info['dress-code']}
+      text={dressCodeText}
       key={6}
     />;
 
@@ -78,7 +94,7 @@ const RestaurantInfo = props => {
     <Detail
       iconName={faFileLines}
       text="View menu"
-      url={props.info.menu}
+      url={props.info.menu_url}
       key={8}
     />;
 

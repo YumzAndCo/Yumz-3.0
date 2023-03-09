@@ -12,6 +12,7 @@ const restaurantController = require('./controllers/restaurantController');
 const collectionsController = require('./controllers/collectionsController');
 const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
+const ratingsController = require('./controllers/ratingsController');
 
 const app = express();
 const apiRouter = require('./routes/apiRouter');
@@ -55,23 +56,34 @@ app.delete('/api/logout', sessionController.deleteSession, (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/api/addToWishlist', restaurantController.addRestaurant,
+app.post('/api/addToWishlist', restaurantController.addRestaurant, 
+  ratingsController.addRating,
   collectionsController.addToWishlist, (req, res) => {
     res.status(200).json(res.locals.newWishlistItem);
   });
 
-// app.post('/api/addToFavorites', restaurantController.addRestaurant, collectionsController.addToFavorites, (req, res) => {
-//   res.status(200);
-//   res.send(res.locals);
-// });
+app.post('/api/addToFavorites', restaurantController.addRestaurant,
+  ratingsController.addRating,
+  collectionsController.addToFavorites, (req, res) => {
+    res.status(200).json(res.locals.newFavoritesItem);
+  });
 
-app.post('/api/addToReviews', restaurantController.addRestaurant,
+app.post('/api/addToReviews', restaurantController.addRestaurant, 
+  ratingsController.addRating,
   collectionsController.addToReviews, (req, res) => {
     res.status(200).json(res.locals.newReviewItem);
   });
 
 app.get('/api/reviews', collectionsController.getReviews, (req, res) => {
   res.status(200).json(res.locals.reviews);
+});
+
+app.get('/api/favorites', collectionsController.getFavorites, (req, res) => {
+  res.status(200).json(res.locals.favorites);
+});
+
+app.get('/api/wishlist', collectionsController.getWishlist, (req, res) => {
+  res.status(200).json(res.locals.wishlist);
 });
 
 // app.get('/', (req, res) => {

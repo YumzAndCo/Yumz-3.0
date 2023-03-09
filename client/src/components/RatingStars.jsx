@@ -35,7 +35,8 @@ const RatingStars = props => {
             id={`star${i}`} />
         </span>;
       filledStarsCount++;
-    } else {
+    } 
+    else {
       star =
         <span id={`star${i}`}
           onClickCapture={(event) => onStarClick(event.target.id)}

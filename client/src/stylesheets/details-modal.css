@@ -68,6 +68,7 @@ td {
 }
 
 #restaurant-name {
+  position:relative;
   font-family: 'Fredoka One', cursive;
   letter-spacing: .3rem;
   text-align: center;
@@ -79,4 +80,16 @@ td {
   letter-spacing: 0rem;
   font-size: 1rem;
   padding-left: 0.5rem;
+}
+
+#more-info{
+  cursor:pointer;
+  border-right: unset
+}
+#more-info:hover{
+  color:#353535
+}
+#more-info:active{
+  transform:scale(0.97);
+  border-right: none
 }

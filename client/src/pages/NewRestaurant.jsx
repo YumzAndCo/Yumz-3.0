@@ -7,8 +7,63 @@ import '../stylesheets/details-modal.css';
 import RatingNotes from '../components/RatingNotes.jsx';
 import helperFns from '../helperFns.js';
 import { useNavigate } from 'react-router-dom';
+import RatingStars from '../components/RatingStars.jsx';
+import '../stylesheets/ratings-table.css';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as hollowStar } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '../stylesheets/rating-stars.css';
+
 
 const NewRestaurant = props => {
+
+  // lines 21 - 65 are from RatingsTable
+  const [numFilledStars, setNumFilledStars] = useState(0);
+  const [textNotes, setTextNotes] = useState('')
+
+  const onStarClick = (starId) => {
+    /*
+    NOTE: It seems like the "hit" box of the star doesn't line up with the star
+    Seems like it's to the left of the starl... not sure why??
+    */
+    if (starId.length) {
+      const starNum = Number(starId.split('star')[1]);
+      setNumFilledStars(starNum);
+    } else {
+      console.log('empty id');
+    }
+  };
+  
+  const stars = [];
+  let filledStarsCount = 0;
+  for (let i = 1; i < 11; i++) {
+    let star;
+    if (filledStarsCount < numFilledStars) {
+      star =
+        <span id={`star${i}`}
+          onClickCapture={(event) => onStarClick(event.target.id)}
+          className="rating-star"
+          key={i}>
+          <FontAwesomeIcon
+            icon={faStar}
+            id={`star${i}`} />
+        </span>;
+      filledStarsCount++;
+    } 
+    else {
+      star =
+        <span id={`star${i}`}
+          onClickCapture={(event) => onStarClick(event.target.id)}
+          className="rating-star"
+          key={i}>
+          <FontAwesomeIcon
+            icon={hollowStar}
+            className="rating-star"
+            id={`star${i}`} />
+        </span>;
+    }
+    stars.push(star);
+  }
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   const [searchResults, setSearchResults] = useState({});
   const [showReview, setShowReview] = useState(false);
@@ -44,7 +99,8 @@ const NewRestaurant = props => {
         if (latitude && longitude) {
           requestUrl += `&latitude=${latitude}&longitude=${longitude}`;
         }
-      } else if (locationVal.length) {
+      } 
+      else if (locationVal.length) {
         requestUrl += ` near ${locationVal}`;
       }
       // TODO - not handling scenario where no search results come back..
@@ -64,7 +120,8 @@ const NewRestaurant = props => {
       }
 
       setSearchResults(newSearchResults);
-    } catch (error) {
+    } 
+    catch (error) {
       // This should be better error handling..
       console.log('NewRestaurant submitRestaurantName error', error.message);
     }
@@ -96,18 +153,47 @@ const NewRestaurant = props => {
 
       setSearchResults({});
       setRestaurantInfo(newRestaurantInfo);
-    } catch (error) {
+    } 
+    catch (error) {
       // This should be better error handling..
       console.log('NewRestaurant onSearchResultClick error', error.message);
     }
   };
 
   const onFinishBtnClick = async () => {
-    console.log('Finish button clicked');
+    // console.log('Finish button clicked');
     // TO DO - post request to /restaurant
     //app.post('/addToWishlist' post request with newRestaurantInfo as body
     const restaurant = restaurantInfo;
+    restaurant.overall_score = numFilledStars;
+    restaurant.notes = textNotes;
     const response = await fetch('/api/addToReviews', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(restaurant)
+    });
+  };
+
+  const addToWishlist = async () => {
+    const restaurant = restaurantInfo;
+    restaurant.overall_score = numFilledStars;
+    restaurant.notes = textNotes;
+    const response = await fetch('/api/addToWishlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(restaurant)
+    });
+  };
+
+  const addToFavorites = async () => {
+    const restaurant = restaurantInfo;
+    restaurant.overall_score = numFilledStars;
+    restaurant.notes = textNotes;
+    const response = await fetch('/api/addToFavorites', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -121,7 +207,7 @@ const NewRestaurant = props => {
   };
 
   const onReturnHomeBtnClick = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   const searchResultItems = [];
@@ -152,7 +238,8 @@ const NewRestaurant = props => {
         <button id='next-button'>Next</button> */}
       </div>
     );
-  } else if (restaurantInfo === null) {
+  } 
+  else if (restaurantInfo === null) {
     // SEARCH FOR A RESTAURANT
     return (
       <div id='new-restaurant-info'>
@@ -190,27 +277,51 @@ const NewRestaurant = props => {
         </form>
       </div>
     );
-  } else {
+  } 
+  else {
     // VIEW RESTAURANT DETAILS
     return (
       <div id='new-restaurant-info'>
         <div id="restaurant-name">{restaurantInfo.name}</div>
         <RestaurantInfo info={restaurantInfo} />
-        <button>Add to Wishlist</button>
-        <button>Add to Favorites</button>
+        <button onClick = {addToWishlist}>Add to Wishlist</button>
+        <button onClick = {addToFavorites}>Add to Favorites</button>
         <button onClick = {() => setShowReview(!showReview)}>Add Review</button>
         {showReview &&
         <>
           <div className="section-header">
             <span>Ratings</span>
-          </div>
-          <RatingsTable />
+          </div> 
+          {/* lines 281-296 are the RatingsTable component */}
+          <table id="ratings-table">
+            <tbody>
+              {/* ROW 1 */}
+              <tr>
+                <td className="rating-label">
+                  Yumz:
+                </td>
+                <td className="stars">
+                  <span id="rating-stars">
+                    {stars}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <div className="section-header">
             <span>Notes</span>
           </div>
-          <RatingNotes
-            buttonText='Finish'
-            clickHandler={onFinishBtnClick} />
+          <>
+            <textarea id="rating-notes"
+            type="text"
+            onChange = {((e) => setTextNotes(e.target.value))}
+            value = {textNotes}
+            />
+            <button className="details-modal-button"
+              onClick={onFinishBtnClick}>
+              Finish
+            </button>
+          </>
         </>
         }
       </div>

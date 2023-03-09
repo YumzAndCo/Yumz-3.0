@@ -1,6 +1,7 @@
 import React from 'react';
 import '../stylesheets/rating-notes.css';
 
+//moved up to NewRestaurant.jsx and DetailsModal.jsx(?)
 const RatingNotes = props => {
   return (
     <>

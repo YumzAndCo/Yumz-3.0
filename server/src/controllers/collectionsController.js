@@ -14,14 +14,14 @@ const collectionsController = {};
 collectionsController.getReviews = async (req, res, next) => {
   try {
     const userID = req.cookies.ssid;
-    const {collectionId} = req.cookies.reviews;
+    const collectionId = req.cookies.reviews;
     const userReviews = await db.query(`SELECT * FROM collection_restaurant 
-    FULL OUTER JOIN restaurants 
+    INNER JOIN restaurants 
     ON collection_restaurant.restaurant_id = restaurants.restaurant_id
     WHERE collection_restaurant.collection_id = ${collectionId};`);
 
     res.locals.reviews = userReviews.rows;
-
+    console.log('res.locals.reviews:', res.locals.reviews);
     return next();
   } 
   catch(error) {
@@ -36,11 +36,15 @@ collectionsController.getReviews = async (req, res, next) => {
 collectionsController.getFavorites = async (req, res, next) => {
   try {
     const userID = req.cookies.ssid;
-    const {collectionId} = req.cookies.favorites;
+    const collectionId = req.cookies.favorites;
     const userFavorites = await db.query(`SELECT * FROM collection_restaurant 
-    FULL OUTER JOIN restaurants 
+    INNER JOIN restaurants 
     ON collection_restaurant.restaurant_id = restaurants.restaurant_id
     WHERE collection_restaurant.collection_id = ${collectionId};`);
+
+    res.locals.favorites = userFavorites.rows;
+    console.log('res.locals.favorites:', res.locals.favorites);
+    return next();
   } 
   catch(error) {
     return next({
@@ -53,14 +57,23 @@ collectionsController.getFavorites = async (req, res, next) => {
 
 collectionsController.getWishlist = async (req, res, next) => {
   try {
-    const {userID} = req.body;
-    const userWishlist = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'wishlist'`);
+    const userID = req.cookies.ssid;
+    const collectionId = req.cookies.wishlist;
+    const userWishlist = await db.query(`SELECT * FROM collection_restaurant 
+    INNER JOIN restaurants 
+    ON collection_restaurant.restaurant_id = restaurants.restaurant_id
+    WHERE collection_restaurant.collection_id = ${collectionId};`);
+
+    res.locals.wishlist = userWishlist.rows;
+    console.log('res.locals.wishlist:', res.locals.wishlist);
+    return next();
 
   } 
   catch(error) {
     return next({
-      log: 'an error occurred',
-      message: 'an error occurred'
+      log: `an error occurred in getWishlist, ${error}`,
+      message: 'an error occurred in getWishlist',
+      error
     });
   }
 };
