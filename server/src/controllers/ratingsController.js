@@ -14,12 +14,16 @@ const ratingsController = {};
 ratingsController.addRating = async (req, res, next) => {
   try {
     const userId = req.cookies.ssid;
+    console.log('userID', userId);
     const restaurantID = res.locals.restID;
+    console.log('restaurantID', restaurantID);
     //res.locals.restID
     
     const date = new Date.now();
+    // console.log('req.body:', req.body);
 
     const { overall_score, notes } = req.body;
+    console.log('ratings data:', overall_score + ' ' + notes);
 
     const newRating = await  db.query(
       `INSERT INTO ratings (user_id, restaurant_id, date_last_updated, overall_score, notes) 
@@ -41,7 +45,32 @@ ratingsController.getRating = async (req, res, next) => {
   try {
     const userId = req.cookies.ssid;
 
-    const rest
+    const restIds = [];
+
+    if(res.locals.wishlist){
+      res.locals.wishlist.forEach(el => {
+        restIds.push(el.restaurant_id);
+      });
+    }
+
+    if(res.locals.favorites){
+      res.locals.favorites.forEach(el => {
+        restIds.push(el.restaurant_id);
+      });
+    }
+
+    if(res.locals.reviews){
+      res.locals.reviews.forEach(el => {
+        restIds.push(el.restaurant_id);
+      });
+    }
+
+    const userRatings = await db.query(`SELECT * FROM ratings 
+    WHERE restaurant_id IN (${restIds});`);
+
+    res.locals.ratings = userRatings.rows;
+    console.log('res.locals.ratings:', res.locals.ratings);
+    return next();
 
   } catch (err) {
     return next(createError({

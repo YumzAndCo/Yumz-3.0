@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DetailsModal = props => {
   const [numFilledStars, setNumFilledStars] = useState(0);
-  const [textNotes, setTextNotes] = useState('')
+  const [textNotes, setTextNotes] = useState('');
 
   const onStarClick = (starId) => {
     /*
@@ -112,9 +112,17 @@ const DetailsModal = props => {
         <div className="section-header">
           <span>Notes</span>
         </div>
-        <RatingNotes
-          clickHandler={onSaveChangesBtnClick}
-          buttonText='Save Changes' />
+        <>
+          <textarea id="rating-notes"
+            type="text"
+            onChange = {((e) => setTextNotes(e.target.value))}
+            value = {textNotes}
+          />
+          <button className="details-modal-button"
+            onClick={onSaveChangesBtnClick}>
+              Save Changes
+          </button>
+        </>
       </div>
     );
   }

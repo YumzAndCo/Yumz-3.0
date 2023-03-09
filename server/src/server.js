@@ -74,9 +74,10 @@ app.post('/api/addToReviews', restaurantController.addRestaurant,
     res.status(200).json(res.locals.newReviewItem);
   });
 
-app.get('/api/reviews', collectionsController.getReviews, (req, res) => {
-  res.status(200).json(res.locals.reviews);
-});
+app.get('/api/reviews', collectionsController.getReviews,
+  ratingsController.getRating, (req, res) => {
+    res.status(200).json(res.locals);
+  });
 
 app.get('/api/favorites', collectionsController.getFavorites, (req, res) => {
   res.status(200).json(res.locals.favorites);

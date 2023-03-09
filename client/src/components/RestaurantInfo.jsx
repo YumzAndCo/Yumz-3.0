@@ -25,7 +25,7 @@ const RestaurantInfo = props => {
     />
   );
   const hoursStr = props.info.hours;
-  const hoursArr = hoursStr.split(',');
+  // const hoursArr = hoursStr.split(',');
 
   {/**
   //REGEX for making a line break in 'Hours' at any comma:
@@ -54,7 +54,7 @@ const RestaurantInfo = props => {
   mainDetails.push(
     <Detail
       iconName={faClock}
-      text={hoursStr.replace(/,\s?/gm, '\n')}
+      text={hoursStr}
       key={3}
     />
   );
