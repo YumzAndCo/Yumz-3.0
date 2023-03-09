@@ -26,6 +26,9 @@ export const Wishlist = () => {
   else{
     return(
       <>
+        <div className = 'wishlist-page'>
+          <h1>Add restaurants to your wishlist!</h1>
+        </div>
       </>
     );
   }

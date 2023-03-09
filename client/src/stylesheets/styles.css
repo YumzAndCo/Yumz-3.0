@@ -1,3 +1,8 @@
 body {
     margin: 0;
 }
+
+.wishlist-page {
+    text-align: center;
+    font-size: 'League Spartan', sans-serif;
+}

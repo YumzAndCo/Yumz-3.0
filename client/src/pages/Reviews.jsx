@@ -31,6 +31,9 @@ export const Reviews = () => {
   else{
     return(
       <>
+        <div className = 'wishlist-page'>
+          <h1>Add restaurants to your reviews list!</h1>
+        </div>
       </>
     );
   }

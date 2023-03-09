@@ -56,9 +56,17 @@ const DetailsModal = props => {
     stars.push(star);
   }
 
-  const onSaveChangesBtnClick = () => {
+  const onSaveChangesBtnClick = async () => {
     // TO DO
-    // Should make a request to PATCH /rating with changes
+    // Should make a request to PATCH /rating with changes /api/editRating, restId, stars, notes
+
+    const response = await fetch('/api/editRating', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({restId: props.restaurant.restaurant_id, stars: numFilledStars, notes: textNotes})
+    });
     console.log('save changes button clicked');
   };
 

@@ -67,7 +67,7 @@ ratingsController.getRating = async (req, res, next) => {
     }
 
     const userRatings = await db.query(`SELECT * FROM ratings 
-    WHERE restaurant_id IN (${restIds});`);
+    WHERE restaurant_id IN (${restIds}) AND user_id = ${userId};`);
 
     res.locals.ratings = userRatings.rows;
     console.log('res.locals.ratings:', res.locals.ratings);
@@ -87,10 +87,12 @@ ratingsController.editRating = async (req, res, next) => {
   try {
     const userId = req.cookies.ssid;
 
-    const restId ;
+    const { restId, stars, notes } = req.body;
 
-    const userRatings = await db.query(`UPDATE * FROM ratings (stars, notes)
-    VALUES (${stars}, '${notes}') WHERE restaurant_id IN (${restId})`);
+    const userRatings = await db.query(`UPDATE ratings
+    SET overall_score = ${stars}, notes ='${notes}'
+    WHERE restaurant_id = ${restId} AND user_id = ${userId}
+    RETURNING *;`);
 
     res.locals.ratings = userRatings.rows;
     console.log('res.locals.ratings updated:', res.locals.ratings);

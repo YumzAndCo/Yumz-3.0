@@ -26,6 +26,9 @@ export const Favorites = () => {
   else{
     return(
       <>
+        <div className = 'wishlist-page'>
+          <h1>Add restaurants to your favorites list!</h1>
+        </div>
       </>
     );
   }

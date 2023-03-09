@@ -6,7 +6,7 @@ import '../stylesheets/new-restaurant.css';
 import '../stylesheets/details-modal.css';
 import RatingNotes from '../components/RatingNotes.jsx';
 import helperFns from '../helperFns.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import RatingStars from '../components/RatingStars.jsx';
 import '../stylesheets/ratings-table.css';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -19,7 +19,8 @@ const NewRestaurant = props => {
 
   // lines 21 - 65 are from RatingsTable
   const [numFilledStars, setNumFilledStars] = useState(0);
-  const [textNotes, setTextNotes] = useState('')
+  const [textNotes, setTextNotes] = useState('');
+  const [goToHome, setGoToHome] = useState(false);
 
   const onStarClick = (starId) => {
     /*
@@ -174,6 +175,9 @@ const NewRestaurant = props => {
       },
       body: JSON.stringify(restaurant)
     });
+    if (response.status === 200){
+      setGoToHome(true);
+    }
   };
 
   const addToWishlist = async () => {
@@ -223,7 +227,14 @@ const NewRestaurant = props => {
     );
   }
 
-  if (searchResultItems.length > 0) {
+  if (goToHome){
+    return(
+      <>
+        <Navigate to = '/home'/>
+      </>
+    )
+  }
+  else if (searchResultItems.length > 0) {
     // VIEW SEARCH RESULTS
     return (
       <div id='new-restaurant-info'>
@@ -313,9 +324,9 @@ const NewRestaurant = props => {
           </div>
           <>
             <textarea id="rating-notes"
-            type="text"
-            onChange = {((e) => setTextNotes(e.target.value))}
-            value = {textNotes}
+              type="text"
+              onChange = {((e) => setTextNotes(e.target.value))}
+              value = {textNotes}
             />
             <button className="details-modal-button"
               onClick={onFinishBtnClick}>
