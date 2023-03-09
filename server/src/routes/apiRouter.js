@@ -17,9 +17,11 @@ router.get('/results-next-page', googlePlacesAPIController.getNextPage, (req, re
   return res.status(200).json(res.locals.nextPageResults);
 });
 
-router.get('/place-details', googlePlacesAPIController.getPlaceDetails, (req, res) => {
-  return res.status(200).json(res.locals.placeDetailsResults);
+router.get('/place-details',
+  googlePlacesAPIController.getPlaceDetails,
+  yelpFusionAPIController.getRestaurantDetails,(req, res) => {
+    return res.status(200).json(res.locals);
   // return res.status(200).json(res.locals.restaurantDetailsResults);
-});
+  });
 
 module.exports = router;

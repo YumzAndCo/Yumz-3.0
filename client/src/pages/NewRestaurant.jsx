@@ -152,17 +152,21 @@ const NewRestaurant = props => {
 
       // Note: Google Places API doesn't provide all of the details, so hardcoding for now
       // Yelp API should provide remaining details
+      //restaurantDetailsResults - yelp
+      //placeDetailsResults - google
       const newRestaurantInfo = await {};
-      newRestaurantInfo['googlePlaceId'] = restaurantDetails.id;
-      newRestaurantInfo['name'] = restaurantDetails.name;
-      newRestaurantInfo['address'] = restaurantDetails.address;
-      newRestaurantInfo['category'] = 'American (Traditional), Pizza, Pasta Shops';
-      newRestaurantInfo['parking'] = 'Private lot parking';
-      newRestaurantInfo['hours'] = restaurantDetails.hours;
-      newRestaurantInfo['menu'] = 'https://www.google.com';
-      newRestaurantInfo['dress-code'] = 'Casual';
-      newRestaurantInfo['reservations'] = restaurantDetails.reservable;
-      newRestaurantInfo['delivery'] = restaurantDetails.takeout;
+      console.log('Restaurant',restaurantDetails.restaurantDetailsResults.businesses[0]);
+      const yelpInfo = restaurantDetails.restaurantDetailsResults.businesses[0];
+      newRestaurantInfo['googlePlaceId'] = restaurantDetails.placeDetailsResults.id;
+      newRestaurantInfo['name'] = restaurantDetails.placeDetailsResults.name;
+      newRestaurantInfo['address'] = restaurantDetails.placeDetailsResults.address;
+      newRestaurantInfo['category'] = yelpInfo.categories[0].title ? yelpInfo.categories[0].title : 'N/A';
+      newRestaurantInfo['price'] = yelpInfo.price ? yelpInfo.price : 'N/A';
+      newRestaurantInfo['hours'] = restaurantDetails.placeDetailsResults.hours;
+      newRestaurantInfo['menu'] = yelpInfo.url ? yelpInfo.url : 'N/A';
+      newRestaurantInfo['phone'] = yelpInfo.display_phone ? yelpInfo.display_phone : 'N/A';
+      newRestaurantInfo['reservations'] = restaurantDetails.placeDetailsResults.reservable;
+      newRestaurantInfo['delivery'] = restaurantDetails.placeDetailsResults.takeout;
       newRestaurantInfo['credit-cards'] = true;
 
       setSearchResults({});
@@ -204,6 +208,7 @@ const NewRestaurant = props => {
       },
       body: JSON.stringify(restaurant)
     });
+    navigate('/home');
   };
 
   const addToFavorites = async () => {
@@ -217,6 +222,7 @@ const NewRestaurant = props => {
       },
       body: JSON.stringify(restaurant)
     });
+    navigate('/home');
   };
 
   const onReturnSearchBtnClick = () => {
@@ -308,9 +314,9 @@ const NewRestaurant = props => {
       <div id='new-restaurant-info'>
         <div id="restaurant-name">{restaurantInfo.name}</div>
         <RestaurantInfo info={restaurantInfo} />
-        <button onClick = {addToWishlist}>Add to Wishlist</button>
-        <button onClick = {addToFavorites}>Add to Favorites</button>
-        <button onClick = {() => setShowReview(!showReview)}>Add Review</button>
+        <button className="details-modal-button" onClick = {addToWishlist}>Add to Wishlist</button>
+        <button className="details-modal-button" onClick = {addToFavorites}>Add to Favorites</button>
+        <button className="details-modal-button" onClick = {() => setShowReview(!showReview)}>Add Review</button>
         {showReview &&
         <>
           <div className="section-header">

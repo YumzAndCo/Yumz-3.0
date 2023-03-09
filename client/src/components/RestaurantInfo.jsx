@@ -2,7 +2,7 @@ import React from 'react';
 import Detail from './Detail.jsx';
 import DetailsTable from './DetailsTable.jsx';
 import '../stylesheets/details-modal.css';
-import { faLocationDot, faCircleInfo, faPhone, faTruckFast, faShirt, faCar } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faCircleInfo, faPhone, faTruckFast, faShirt, faCar, faMoneyCheckDollar, faMobileScreen } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faCreditCard, faFileLines } from '@fortawesome/free-regular-svg-icons';
 
 const RestaurantInfo = props => {
@@ -20,7 +20,7 @@ const RestaurantInfo = props => {
   mainDetails.push(
     <Detail
       iconName={faCircleInfo}
-      text={props.info.cuisine}
+      text={props.info.category}
       key={2}
     />
   );
@@ -59,11 +59,11 @@ const RestaurantInfo = props => {
     />
   );
 
-  const parkingText = props.info.parking_options ? props.info.parking_options : 'N/A';
-  details['parking'] =
+  const phone = props.info.phone ? props.info.phone : 'N/A';
+  details['phone'] =
     <Detail
-      iconName={faCar}
-      text={parkingText}
+      iconName={faMobileScreen}
+      text={phone}
       key={4}
     />;
 
@@ -74,11 +74,12 @@ const RestaurantInfo = props => {
       text={deliveryTxt}
       key={5}
     />;
-  const dressCodeText = props.info.dress_code ? props.info.dress_code : 'N/A';
-  details['dress-code'] =
+    
+  const price = props.info.price ? props.info.price : 'N/A';
+  details['price'] =
     <Detail
-      iconName={faShirt}
-      text={dressCodeText}
+      iconName={faMoneyCheckDollar}
+      text={price}
       key={6}
     />;
 
@@ -93,8 +94,8 @@ const RestaurantInfo = props => {
   details['menu'] =
     <Detail
       iconName={faFileLines}
-      text="View menu"
-      url={props.info.menu_url}
+      text="View Yelp"
+      url={props.info.menu}
       key={8}
     />;
 

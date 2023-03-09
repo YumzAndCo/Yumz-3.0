@@ -17,7 +17,7 @@ const DetailsTable = props => {
             {props.details['credit-cards']}
           </td>
           <td>
-            {props.details['dress-code']}
+            {props.details['price']}
           </td>
         </tr>
         <tr>
@@ -25,7 +25,7 @@ const DetailsTable = props => {
             {props.details['delivery']}
           </td>
           <td>
-            {props.details['parking']}
+            {props.details['phone']}
           </td>
         </tr>
       </tbody>

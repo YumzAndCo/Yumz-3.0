@@ -26,6 +26,10 @@ td {
   background-color: #ff7621;
 }
 
+.details-modal-button:active {
+  transform:scale(0.97);
+}
+
 .section-header {
   width: 99%;
   border-bottom: 2px solid #884488;
