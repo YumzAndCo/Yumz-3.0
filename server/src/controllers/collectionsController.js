@@ -55,6 +55,30 @@ collectionsController.getFavorites = async (req, res, next) => {
   }
 };
 
+collectionsController.getFavoritesRatings = async (req, res, next) => {
+  try {
+    const userID = req.cookies.ssid;
+    const collectionId = req.cookies.favorites;
+    const userFavorites = await db.query(`SELECT * FROM collection_restaurant 
+    INNER JOIN restaurants 
+    ON collection_restaurant.restaurant_id = restaurants.restaurant_id
+    INNER JOIN ratings
+    ON ratings.restaurant_id = collection_restaurant.restaurant_id
+    WHERE collection_restaurant.collection_id = ${collectionId};`);
+
+    res.locals.favorites = userFavorites.rows;
+    console.log('res.locals.favorites:', res.locals.favorites);
+    return next();
+  } 
+  catch(error) {
+    return next({
+      log: `an error occurred in getFavorites, ${error}`,
+      message: 'an error occurred in getFavorites',
+      error
+    });
+  }
+};
+
 collectionsController.getWishlist = async (req, res, next) => {
   try {
     const userID = req.cookies.ssid;

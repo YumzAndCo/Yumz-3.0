@@ -155,7 +155,7 @@ const NewRestaurant = props => {
       //restaurantDetailsResults - yelp
       //placeDetailsResults - google
       const newRestaurantInfo = await {};
-      console.log('Restaurant',restaurantDetails.restaurantDetailsResults.businesses[0]);
+      // console.log('Restaurant',typeof restaurantDetails.placeDetailsResults.reservable);
       const yelpInfo = restaurantDetails.restaurantDetailsResults.businesses[0];
       newRestaurantInfo['googlePlaceId'] = restaurantDetails.placeDetailsResults.id;
       newRestaurantInfo['name'] = restaurantDetails.placeDetailsResults.name;
@@ -165,9 +165,9 @@ const NewRestaurant = props => {
       newRestaurantInfo['hours'] = restaurantDetails.placeDetailsResults.hours;
       newRestaurantInfo['menu'] = yelpInfo.url ? yelpInfo.url : 'N/A';
       newRestaurantInfo['phone'] = yelpInfo.display_phone ? yelpInfo.display_phone : 'N/A';
-      newRestaurantInfo['reservations'] = restaurantDetails.placeDetailsResults.reservable;
+      newRestaurantInfo['reservations'] = restaurantDetails.placeDetailsResults.reservable == 'N/A' ? false : true;
       newRestaurantInfo['delivery'] = restaurantDetails.placeDetailsResults.takeout;
-      newRestaurantInfo['credit-cards'] = true;
+      newRestaurantInfo['credit_cards'] = true;
 
       setSearchResults({});
       setRestaurantInfo(newRestaurantInfo);

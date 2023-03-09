@@ -12,6 +12,7 @@ import DetailsModal from './components/DetailsModal.jsx';
 import NewRestaurant from './pages/NewRestaurant.jsx';
 import {useNavigate} from 'react-router-dom';
 import helperFns from './helperFns.js';
+import Profile from './pages/Profile.jsx';
 
 
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='/wishlist' element={<Wishlist />} />
         {/* <Route path='/details-modal' element={<DetailsModal show={true} />} /> */}
         <Route path='/new-restaurant' element={<NewRestaurant />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </div>
 

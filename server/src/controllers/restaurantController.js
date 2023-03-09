@@ -6,7 +6,7 @@ const restaurantController = {};
 restaurantController.addRestaurant = async (req, res, next) => {
   try{
     // console.log('body is', req.body);
-    const {name, category, hours, address, delivery, menu} = req.body;
+    const {name, category, price, hours, address, delivery, menu, phone, reservations, credit_cards} = req.body;
     //check if restaurant is already stored in database by checking if restaurant_id exists
     const queryRestaurant = await db.query(`SELECT * FROM restaurants WHERE name = '${name}' AND address = '${address}'`);
     if(queryRestaurant.rowCount !== 0) {
@@ -19,8 +19,11 @@ restaurantController.addRestaurant = async (req, res, next) => {
     else {
       // console.log(req.body)
       const newRestaurant = await db.query(
-        `INSERT INTO restaurants (name, cuisine, hours, address, offers_delivery, menu_url) 
-        VALUES ('${name}', '${category}', '${hours}', '${address}', '${delivery}', '${menu}')
+        `INSERT INTO restaurants 
+        (name, price, category, hours, address, delivery, menu, phone, reservations, credit_cards) 
+        VALUES 
+        ('${name}', '${price}', '${category}', '${hours}', '${address}', '${delivery}', 
+        '${menu}', '${phone}', ${reservations}, ${credit_cards})
         RETURNING *;`
       );
       // console.log('newRestaurant', newRestaurant);
@@ -32,7 +35,7 @@ restaurantController.addRestaurant = async (req, res, next) => {
   }
   catch(err){
     return next({
-      log: `an error occurred in addRestaurtant, ${err}`,
+      log: `an error occurred in addRestaurant, ${err}`,
       message: 'an error occurred',
       err
     });

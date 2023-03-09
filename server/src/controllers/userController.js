@@ -15,10 +15,8 @@ const userController = {};
 
 userController.verifyUser = async (req, res, next) => {
   try {
-    //test: console-log params to make sure params are being sent over
     const { email, password } = req.body;
 
-    //test: ensure req.params are appropriately saved as consts
     // console.log('email: ', email,  'password : ', password)
     
     const queryResult = await db.query(`SELECT * FROM users WHERE email = '${email}';`);
@@ -38,16 +36,12 @@ userController.verifyUser = async (req, res, next) => {
       return next();
     }
     else {
-      // console.log('HERE!!!!');
       bcrypt.compare(password, queryResult.rows[0].password)
         .then(result => {
-          // console.log('Here!');
           if (!result) res.locals.status = 300;
           else {
             res.locals.user = queryResult.rows[0];
             res.locals.collections = collection;
-            // console.log('HERE',res.locals.user);
-            // res.locals.collections
             return next();
           }
         });
@@ -98,8 +92,6 @@ userController.createUser = async (req, res, next) => {
           RETURNING *;`
         );
         
-        //getting that instance from the database and saving it to res.locals
-        // const queryResult = await db.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}';`);
         res.locals.user = created.rows[0];
         console.log('user is:', res.locals.user);
         
@@ -124,10 +116,7 @@ userController.createUser = async (req, res, next) => {
           VALUES ('${userID}', 'reviews')
           RETURNING *;`
         );
-    
-        // const userFavorites = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'favorites'`);
-        // const userWishlist = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'wishlist'`);
-        // const userReviews = await db.query(`SELECT * FROM users WHERE user_id = '${userID}' AND name = 'reviews'`);
+  
     
         const collections = {
           userFavorites: userFavorites,
@@ -154,6 +143,66 @@ userController.createUser = async (req, res, next) => {
     });
   }
 };
+
+userController.getUser = async (req, res, next) => {
+  try {
+    const userId = req.cookies.ssid;
+    const queryResult = await db.query(`SELECT * 
+    FROM users 
+    WHERE user_id = ${userId};`);
+    res.locals.profile = queryResult.rows;
+    return next();
+  }
+  catch(error) {
+    return next({
+      log: 'userController.getUser() ERROR' + error,
+      message: {err: error}
+    });
+  }
+};
+
+userController.setProfilePicture = async (req, res, next) => {
+  try {
+    const userId = req.cookies.ssid;
+    const { profilePic } = req.body;
+
+    const picURL = await db.query(`UPDATE users
+      SET profile_picture = '${profilePic}'
+      WHERE user_id = ${userId}
+      RETURNING * ;`);
+    
+    res.locals.profile_picture = picURL.rows;
+    return next();
+
+  } catch(err){
+    return next(createError({
+      log: `error in userController.setProfilePicture, ${err}`,
+      message: 'error in setProfilePicture',
+      err
+    }));
+  }
+};
+
+userController.setBio = async (req, res, next) => {
+  try {
+    const userId = req.cookies.ssid;
+    const { bio } = req.body;
+    
+    const updateBio = await db.query(`UPDATE users
+     SET bio = ${bio} 
+     WHERE user_id = ${userId}
+     RETURNING *;`);
+
+    res.locals.bio = updateBio.rows;
+    return next();
+  }
+  catch(error) {
+    return next({
+      log: 'userController.setBio() ERROR' + error,
+      message: {err: error}
+    });
+  }
+}
 
 
 module.exports = userController;

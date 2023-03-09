@@ -93,6 +93,19 @@ app.patch('/api/editRating', ratingsController.editRating, (req, res) => {
   res.status(200).json(res.locals.ratings);
 });
 
+app.get('/api/user', userController.getUser,
+  collectionsController.getFavoritesRatings, (req, res) => {
+    res.status(200).json(res.locals);
+  });
+
+app.post('/api/profilepic', userController.setProfilePicture, (req, res) => {
+  res.status(200).json(res.locals.profile_picture);
+});
+
+app.post('/api/userbio', userController.setBio, (req, res) => {
+  res.status(200).json(res.locals.bio);
+});
+
 // app.get('/', (req, res) => {
 //   res.status(200).sendFile(path.join(__dirname, '../../client/src/index.html'));
 // });

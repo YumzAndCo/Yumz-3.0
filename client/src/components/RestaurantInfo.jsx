@@ -83,8 +83,8 @@ const RestaurantInfo = props => {
       key={6}
     />;
 
-  const creditCardTxt = props.info['credit-cards'] ? 'Accepts credit cards' : 'Does not accept credit cards';
-  details['credit-cards'] =
+  const creditCardTxt = props.info['credit_cards'] ? 'Accepts credit cards' : 'Does not accept credit cards';
+  details['credit_cards'] =
     <Detail
       iconName={faCreditCard}
       text={creditCardTxt}

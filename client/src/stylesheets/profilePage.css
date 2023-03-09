@@ -1,0 +1,94 @@
+body {
+  background-color: #FFFCF9;
+}
+.profile-page {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile-background{
+    border: 1px solid red;
+    padding: 50px 50px;
+    background: lavender;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile-picture{
+    border: 1px solid black;
+    height: 400px;
+    width: 400px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    object-fit: fill;
+    border-radius: 100%;
+}
+
+.profile-pic-submit{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px ;
+    margin-bottom: 50px ;
+}
+
+.profile-pic-submit input{
+    text-align:center;
+    border: 0.1rem black solid;
+    height: 1.7vh;
+    border-radius: 10px;
+    margin-right: 5px;
+    width: 10vw;
+}
+
+#bio {
+  width: 400px;
+  height: 100px;
+  max-height: auto;
+  resize: none;
+  margin-bottom: 10px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.profile-pic-submit button {
+  height: 2rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.7rem;
+  background-color: #FF6978;
+  border: 3px solid #b1ede8;
+  border-radius: 7px;
+  color: #352D39;
+}
+
+.profile-pic-submit button:hover {
+  background-color: #ff7621;
+}
+
+.profile-pic-submit button:active {
+  transform: scale(0.97);
+}
+
+#bio-submit {
+  height: 2rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  background-color: #FF6978;
+  border: 3px solid #b1ede8;
+  border-radius: 7px;
+  color: #352D39;
+}
+
+#bio-submit:hover{
+  background-color: #ff7621;
+}
+
+#bio-submit:active {
+  transform: scale(0.97);
+}
