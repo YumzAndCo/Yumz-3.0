@@ -7,12 +7,12 @@
   font-family: 'League Spartan', sans-serif;
   font-weight: 500;
   font-size: 1.3rem;
-  background-color: #FD7F32;
-  border: 1px solid #FD7F32;
+  background-color: #d7f7f4;
+  border: 1px solid #b1ede8;
   border-radius: 7px;
   color: #522952;
 }
 
 .details-modal-button:hover {
-  background-color: #ff7621;
+  filter: brightness(95%);
 }

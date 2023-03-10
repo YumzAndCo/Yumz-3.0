@@ -1,5 +1,5 @@
 body {
-  background-color: #FCF9E8;
+  background-color: #b1ede8;
 }
 .listview {
   position:relative;
@@ -23,8 +23,8 @@ body {
 .preview {
   padding: 3px;
   margin: 5px;
-  background-color: #f3ebff;
-  border: 3px solid #aa8cd7;
+  background-color: #fffcf9;
+  border: 3px solid #6d435a;
   border-radius: 10px;
   width: 900px;
 }
@@ -35,7 +35,7 @@ body {
   display: inline-block;
   text-align: center;
   /* border-left: 1px solid black; */
-  border-right: 1px solid black;
+  border-right: 1px solid #352d39;
 }
 
 .collectionTitle {
@@ -46,7 +46,7 @@ body {
   padding: 10px;
   margin: 10px;
   font-size: 3em;
-  color: #474747;
+  color: #352d39;
   text-align:center;
   font-family: 'Fredoka One', cursive;
   /* border: 5px solid #aa8cd7; */
@@ -81,7 +81,7 @@ body {
   border: none;
   margin-left: 50px;
   margin-top: 40px;
-  background-color: #FCF9E8;
+  background-color: #fffcf9;
   position: absolute;
   left: 0;
   top: 0;
@@ -90,7 +90,7 @@ body {
 }
 
 #back-to-home:hover{
-  color:#aa8cd7
+  filter: brightness(97%);
 }
 
 #back-to-home:active{

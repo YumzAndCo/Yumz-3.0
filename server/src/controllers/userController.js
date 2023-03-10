@@ -163,8 +163,10 @@ userController.getUser = async (req, res, next) => {
 
 userController.setProfilePicture = async (req, res, next) => {
   try {
+    console.log('IN SETPROFILEPICTURE');
     const userId = req.cookies.ssid;
     const { profilePic } = req.body;
+    console.log('profile pic is', profilePic);
 
     const picURL = await db.query(`UPDATE users
       SET profile_picture = '${profilePic}'
@@ -189,7 +191,7 @@ userController.setBio = async (req, res, next) => {
     const { bio } = req.body;
     
     const updateBio = await db.query(`UPDATE users
-     SET bio = ${bio} 
+     SET bio = '${bio}' 
      WHERE user_id = ${userId}
      RETURNING *;`);
 

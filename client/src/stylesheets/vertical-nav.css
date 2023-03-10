@@ -8,14 +8,14 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
-  background-color: #5D325D;
+  background-color: #352d39;
 }
 
 .vertical-nav-btn {
   background: none;
   border: none;
   cursor: pointer;
-  color: #EAD9EB;
+  color: #fffcf9;
   font-size: 2rem;
 }
 

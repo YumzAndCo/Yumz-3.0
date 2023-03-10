@@ -37,6 +37,7 @@ const Profile = () => {
       //   console.log('data is', data);
       if (response.status === 200){
         setUserData(data.profile[0]);
+        setBio(data.profile[0].bio);
         if (data.profile[0].profile_picture) setBg(data.profile[0].profile_picture);
         if (data.favorites.length > 1) data.favorites.sort((a,b) => b.overall_score - a.overall_score);
         if (data.favorites.length > 3) setFavoritesData(data.favorites.slice(0, 3));
@@ -48,23 +49,25 @@ const Profile = () => {
     getUserDetails();
   }, []);
 
-  const submitProfilePic = (url) => {
-    fetch('/api/profilePic', {
+  const submitProfilePic = async () => {
+    console.log(profilePic);
+    const response = await fetch('/api/profilepic', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(url)
+      body: JSON.stringify({ profilePic })
     });
+    if (response.status === 200) setBg(profilePic);
   };
   
-  const submitBio = (bio) => {
+  const submitBio = () => {
     fetch('/api/userbio', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(bio)
+      body: JSON.stringify({ bio })
     });
   };
   
@@ -95,20 +98,21 @@ const Profile = () => {
             onChange = {(e) => setProfilePic(e.target.value)}/>
           <button onClick = {submitProfilePic}> Submit </button>
         </div>
-        <textArea id="bio"
+        <textarea id="bio"
           value = {bio} 
           onChange = {(e) => setBio(e.target.value)}/>
         <button id='bio-submit' onClick = {submitBio}> Submit </button>
-        <h2>Favorite Restaurants</h2>
-        <div id = 'top-favorites'>
-          {favoritesData && favoritesData.map((favorite) => (
-            <div className="preview" key={favorite.id}>
-              <span className = "item" id="name">{favorite.name}</span> 
-              <span className = "item" id="stars">{favorite.overall_score} ☆</span>
-              <span className = "item" id="cuisine">{favorite.category}</span>
-            </div>
-          ))}
-        </div>
+        
+      </div>
+      <h2>Favorite Restaurants</h2>
+      <div id = 'top-favorites'>
+        {favoritesData && favoritesData.map((favorite) => (
+          <div className="favorites" key={favorite.id}>
+            <span className = "favItem" id="name">{favorite.name}</span> 
+            <span className = "favItem" id="stars">{favorite.overall_score} ☆</span>
+            <span className = "favItem" id="cuisine">{favorite.category}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

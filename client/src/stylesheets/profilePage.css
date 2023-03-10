@@ -1,6 +1,38 @@
 body {
   background-color: #FFFCF9;
 }
+
+.favorites {
+  padding: 3px;
+  margin: 5px;
+  background-color: #bd96ac;
+  border: 2px solid #6d435a;
+  border-radius: 10px;
+  width: 600px;
+}
+
+.favItem {
+  padding: 3px 6px 3px 6px;
+  color: #352D39;
+  font-family: 'Vazirmatn', sans-serif;
+  display: inline-block;
+  text-align: center;
+  /* border-left: 1px solid black; */
+}
+
+#name {
+  width: 250px;
+}
+
+#stars {
+  width: 40px;
+}
+
+#cuisine{
+  width: 200px;
+}
+
+
 .profile-page {
   height: 100vh;
   position: relative;
@@ -10,9 +42,12 @@ body {
   align-items: center;
 }
 .profile-background{
-    border: 1px solid red;
+    border: 3px solid #94eae3;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    width: 50vw;
     padding: 50px 50px;
-    background: lavender;
+    background: #b1ede8;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,14 +55,19 @@ body {
 }
 
 #profile-picture{
-    border: 1px solid black;
+    border: 1px solid #352D39;
     height: 400px;
     width: 400px;
     background-repeat: no-repeat;
-    background-size: contain;
-    object-fit: fill;
+    align-items: center;
+    background-size: 100% 100%; 
     border-radius: 100%;
 }
+
+    /* object-fit: cover;
+    background-size: 100%;
+    border-radius: 100%;
+    */
 
 .profile-pic-submit{
     display:flex;
@@ -39,7 +79,7 @@ body {
 
 .profile-pic-submit input{
     text-align:center;
-    border: 0.1rem black solid;
+    border: 0.1rem #352D39;
     height: 1.7vh;
     border-radius: 10px;
     margin-right: 5px;
@@ -51,23 +91,25 @@ body {
   height: 100px;
   max-height: auto;
   resize: none;
+  border-radius: 20px;
+  padding: 10px;
   margin-bottom: 10px;
-  font-family: 'League Spartan', sans-serif;
+  font-family: 'Vazirmatn', sans-serif;
 }
 
 .profile-pic-submit button {
-  height: 2rem;
+  height: 1.5rem;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 0.7rem;
   background-color: #FF6978;
-  border: 3px solid #b1ede8;
+  border: 1px solid #6D435A;
   border-radius: 7px;
   color: #352D39;
 }
 
 .profile-pic-submit button:hover {
-  background-color: #ff7621;
+  filter: brightness(95%);
 }
 
 .profile-pic-submit button:active {
@@ -76,17 +118,17 @@ body {
 
 #bio-submit {
   height: 2rem;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'Vazirmatn', sans-serif;
   font-weight: 500;
   font-size: 0.8rem;
   background-color: #FF6978;
-  border: 3px solid #b1ede8;
+  border: 3px solid #6D435A;
   border-radius: 7px;
   color: #352D39;
 }
 
 #bio-submit:hover{
-  background-color: #ff7621;
+  filter: brightness(95%);
 }
 
 #bio-submit:active {

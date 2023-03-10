@@ -5,14 +5,14 @@
   font-family: 'League Spartan', sans-serif;
   font-weight: 500;
   font-size: 1.5rem;
-  background-color: #FD7F32;
-  border: 1px solid #FD7F32;
+  background-color: #ff6978;
+  border: 1px solid #6D435A;
   border-radius: 7px;
   color: #522952;
 }
 
 .new-restaurant-button:hover {
-  background-color: #ff7621;
+  filter: brightness(97%);
 }
 
 .details-modal-btn {
@@ -24,8 +24,8 @@
 }
 
 #new-restaurant-info {
-  background: #F4E8F4;
-  color: #522952;
+  background: #fffcf9;
+  color: #6D435A;
   font-family: 'League Spartan', sans-serif;
   padding: 2rem;
   height: 100vh;
@@ -45,7 +45,7 @@
 .new-restaurant-input {
   height: 2rem;
   width: 50rem;
-  border: 1px solid #884488;
+  border: 1px solid #352D39;
   border-radius: 3px;
   margin-bottom: 2rem;
   margin-top: 1rem;

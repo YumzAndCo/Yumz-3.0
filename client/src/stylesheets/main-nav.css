@@ -1,4 +1,5 @@
 #main-nav {
+  margin-top:200px;
   grid-column-start: 2;
   display: flex;
   gap: 5vw;
@@ -7,20 +8,20 @@
 }
 
 #main-nav-reviews {
-  background-color: #EAD9EB;
-  border: 1px solid #e2c7e3;
+  background-color: #fffcf9;
+  border: 1px solid hsl(354, 95%, 84%);
   cursor: pointer;
 }
 
 #main-nav-wishlist {
-  background-color: #C09EF4;
-  border: 1px solid #aa8cd7;
+  background-color: #c18ba8;
+  border: 1px solid #6D435A;
   cursor: pointer;
 }
 
 #main-nav-favorites {
-  background-color: #FD7F32;
-  border: 1px solid #e97229;
+  background-color: #fda7af;
+  border: 1px solid #ff6978;
   cursor: pointer;
 }
 

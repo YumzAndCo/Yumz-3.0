@@ -16,14 +16,13 @@ td {
   font-family: 'League Spartan', sans-serif;
   font-weight: 500;
   font-size: 1.3rem;
-  background-color: #FD7F32;
-  border: 1px solid #FD7F32;
+  background-color: #ff6978;
+  border: 1px solid #6d435a;
   border-radius: 7px;
   color: #522952;
 }
 
 .details-modal-button:hover {
-  background-color: #ff7621;
 }
 
 .details-modal-button:active {
