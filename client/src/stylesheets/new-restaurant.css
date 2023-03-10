@@ -5,10 +5,10 @@
   font-family: 'League Spartan', sans-serif;
   font-weight: 500;
   font-size: 1.5rem;
-  background-color: #ff6978;
-  border: 1px solid #6D435A;
+  background-color: #fda7af;
+  border: 3px solid #ff6978;
   border-radius: 7px;
-  color: #522952;
+  color: #352d39;
 }
 
 .new-restaurant-button:hover {
@@ -25,7 +25,7 @@
 
 #new-restaurant-info {
   background: #fffcf9;
-  color: #6D435A;
+  color: #352d39;
   font-family: 'League Spartan', sans-serif;
   padding: 2rem;
   height: 100vh;

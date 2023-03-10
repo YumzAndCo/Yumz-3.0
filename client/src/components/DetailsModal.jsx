@@ -126,7 +126,7 @@ const DetailsModal = props => {
             onChange = {((e) => setTextNotes(e.target.value))}
             value = {textNotes}
           />
-          <button className="details-modal-button"
+          <button id="details-modal-button"
             onClick={onSaveChangesBtnClick}>
               Save Changes
           </button>

@@ -64,7 +64,7 @@ collectionsController.getFavoritesRatings = async (req, res, next) => {
     ON collection_restaurant.restaurant_id = restaurants.restaurant_id
     INNER JOIN ratings
     ON ratings.restaurant_id = collection_restaurant.restaurant_id
-    WHERE collection_restaurant.collection_id = ${collectionId};`);
+    WHERE collection_restaurant.collection_id = ${collectionId} AND ratings.user_id = ${userID};`);
 
     res.locals.favorites = userFavorites.rows;
     console.log('res.locals.favorites:', res.locals.favorites);

@@ -4,6 +4,9 @@ import { Navigate } from 'react-router-dom';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../stylesheets/profilePage.css';
+import boba from '../../assets/images/Boba.png';
+import ramen from '../../assets/images/Ramen.png';
+import pizza from '../../assets/images/Pizza.png';
 
 const Profile = () => {
   const [goToHome, setGoToHome] = useState(false);
@@ -84,10 +87,13 @@ const Profile = () => {
 
   return(
     <div className = 'profile-page'>
-      <button id= "back-to-home"
-        type="button"
-        onClick = {() => setGoToHome(true)} ><FontAwesomeIcon icon={faArrowLeft} /></button>
       <div className = 'profile-background'>
+        <button id= "back-to-home"
+          type="button"
+          onClick = {() => setGoToHome(true)} ><FontAwesomeIcon icon={faArrowLeft} /></button>
+        <img id = 'boba' src = {boba}/>
+        <img id = 'ramen' src = {ramen}/>
+        <img id = 'pizza' src = {pizza}/>
         {userData && <h1>Welcome {userData.name}</h1>}
         <div id = 'profile-picture' style = {{backgroundImage: `url(${bg})`}}>
             
@@ -104,8 +110,9 @@ const Profile = () => {
         <button id='bio-submit' onClick = {submitBio}> Submit </button>
         
       </div>
-      <h2>Favorite Restaurants</h2>
       <div id = 'top-favorites'>
+        <h2>Favorite Restaurants</h2>
+        <hr/>
         {favoritesData && favoritesData.map((favorite) => (
           <div className="favorites" key={favorite.id}>
             <span className = "favItem" id="name">{favorite.name}</span> 

@@ -1,5 +1,6 @@
 #landing {
-  background-color: #b1ede8;
+  background: rgb(203,233,231);
+  background: linear-gradient(0deg, rgba(203,233,231,1) 0%, rgba(177,237,232,1) 53%, rgba(161,236,230,1) 100%);
   height: 100vh;
   width: 100vw;
   display: grid;

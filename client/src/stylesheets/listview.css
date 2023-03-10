@@ -11,8 +11,8 @@ body {
   font-size: 1em;
 }
 
-.listview:hover {
-  filter: brightness(97%);
+.preview:hover {
+  filter: brightness(105%);
 }
 
 .list-header{
@@ -23,10 +23,12 @@ body {
 .preview {
   padding: 3px;
   margin: 5px;
-  background-color: #fffcf9;
+  background-color: #b1ede8;
   border: 3px solid #6d435a;
   border-radius: 10px;
   width: 900px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+
 }
 .item {
   padding: 3px 6px 3px 6px;
@@ -36,6 +38,7 @@ body {
   text-align: center;
   /* border-left: 1px solid black; */
   border-right: 1px solid #352d39;
+  
 }
 
 .collectionTitle {
@@ -81,7 +84,7 @@ body {
   border: none;
   margin-left: 50px;
   margin-top: 40px;
-  background-color: #fffcf9;
+  background-color: rgba(0,0,0,0);
   position: absolute;
   left: 0;
   top: 0;

@@ -2,6 +2,19 @@ body {
   background-color: #FFFCF9;
 }
 
+h1 {
+  font-family: 'Neonderthaw', cursive;
+  font-size: 3.5em;
+  color: #352d39;
+}
+h2 {
+  font-family: 'Neonderthaw', cursive;
+  font-size: 2.3em;
+  color: #352d39;
+  margin-bottom:3px;
+  
+}
+
 .favorites {
   padding: 3px;
   margin: 5px;
@@ -14,7 +27,7 @@ body {
 .favItem {
   padding: 3px 6px 3px 6px;
   color: #352D39;
-  font-family: 'Vazirmatn', sans-serif;
+  font-family:'League Spartan', sans-serif;
   display: inline-block;
   text-align: center;
   /* border-left: 1px solid black; */
@@ -42,6 +55,7 @@ body {
   align-items: center;
 }
 .profile-background{
+    position: relative;
     border: 3px solid #94eae3;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
@@ -52,6 +66,30 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#boba{
+  position:absolute;
+  top: 10px;
+  right: 0px;
+  height: 100px;
+  width: 100px;
+}
+
+#pizza{
+  position:absolute;
+  top: 10px;
+  right: 110px;
+  height: 100px;
+  width: 100px;
+}
+
+#ramen{
+  position:absolute;
+  top: 10px;
+  right: 220px;
+  height: 100px;
+  width: 100px;
 }
 
 #profile-picture{
@@ -75,11 +113,12 @@ body {
     justify-content: center;
     margin-top: 50px ;
     margin-bottom: 50px ;
+    
 }
 
 .profile-pic-submit input{
     text-align:center;
-    border: 0.1rem #352D39;
+    border: 1rem #352D39;
     height: 1.7vh;
     border-radius: 10px;
     margin-right: 5px;
@@ -94,13 +133,12 @@ body {
   border-radius: 20px;
   padding: 10px;
   margin-bottom: 10px;
-  font-family: 'Vazirmatn', sans-serif;
+  font-family: 'League Spartan', sans-serif;
 }
 
 .profile-pic-submit button {
   height: 1.5rem;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
+  font-family:'Fredoka One', cursive; 
   font-size: 0.7rem;
   background-color: #FF6978;
   border: 1px solid #6D435A;
@@ -118,11 +156,10 @@ body {
 
 #bio-submit {
   height: 2rem;
-  font-family: 'Vazirmatn', sans-serif;
-  font-weight: 500;
+  font-family:'Fredoka One', cursive;
   font-size: 0.8rem;
   background-color: #FF6978;
-  border: 3px solid #6D435A;
+  border: 2px solid #6D435A;
   border-radius: 7px;
   color: #352D39;
 }
@@ -133,4 +170,15 @@ body {
 
 #bio-submit:active {
   transform: scale(0.97);
+}
+
+#top-favorites{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#top-favorites hr{
+  width: 40vw;
 }

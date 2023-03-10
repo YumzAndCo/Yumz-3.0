@@ -1,13 +1,13 @@
 a {
   text-decoration: none;
-  color: #522952;
+  color: #6d435a;
 }
 
 td {
   width: 25rem;
 }
 
-.details-modal-button {
+#details-modal-button {
   margin-left: 2rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -16,35 +16,39 @@ td {
   font-family: 'League Spartan', sans-serif;
   font-weight: 500;
   font-size: 1.3rem;
-  background-color: #ff6978;
-  border: 1px solid #6d435a;
+  background-color: #fffcf9;
+  border: 3px solid #6d435a;
   border-radius: 7px;
   color: #522952;
 }
 
-.details-modal-button:hover {
+#details-modal-button:hover {
+  background-color: #ff6978;
 }
 
-.details-modal-button:active {
+#details-modal-button:active {
   transform:scale(0.97);
 }
 
 .section-header {
   width: 99%;
-  border-bottom: 2px solid #884488;
+  border-bottom: 2px solid #6d435a;
   line-height: 0.1em;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
 .section-header span {
-  background: #F4E8F4;
+  background-color: #b1ede8;
+  padding: 0.3rem;
+  border: 1px solid #b1ede8;
+  border-radius: 10px;
   padding-left: 1.5rem;
-  padding-right: 1rem;
+  padding-right: 1.5rem;
   letter-spacing: .1rem;
   font-weight: 500;
   font-size: 1.5rem;
-  color: #884488;
+  color: #352d39;
   border-right: none;
 }
 
@@ -57,7 +61,7 @@ td {
 }
 
 #details-modal {
-  background-color: #F4E8F4;
+  background-color: #b1ede8;
   color: #522952;
   font-family: 'League Spartan', sans-serif;
   font-size: 1.3rem;
@@ -65,9 +69,10 @@ td {
 
 #rating-notes {
   margin-left: 2rem;
-  width: 95%;
+  margin-right: 2rem;
+  width: 92%;
   height: 5rem;
-  border: 1px solid #884488;
+  border: 3px solid #ff6978;
 }
 
 #restaurant-name {

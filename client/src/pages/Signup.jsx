@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../stylesheets/login.css';
 import {useNavigate} from 'react-router-dom';
 
@@ -20,6 +20,18 @@ export const Signup = () => {
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
   
+  useEffect(() => {
+    async function fetchSession() {
+      const response = await fetch('/api/session');
+      if (response.ok) {
+        return navigate('/home');
+      }
+      else {
+        return;
+      }
+    }
+    fetchSession();
+  }, []);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -28,7 +40,7 @@ export const Signup = () => {
       email,
       password
     });
-    navigate('/home');
+    return navigate('/home');
   };
 
   return(

@@ -1,3 +1,4 @@
+
 .login, .signup {
   font-family: 'Fredoka One', cursive;
   color: #474747;
@@ -5,7 +6,7 @@
   text-align: center;
   padding: 50px;
   border: 5px solid #ff6978;
-  background-color:#fffcf9;
+  background-color:#b1ede8;
   border-radius: 10px;
   left: 50%;
   top: 40%;
@@ -28,5 +29,5 @@
 }
 
 .signupButton {
-  font-size: 0.5em;
+  font-size: 0.8em;
 }

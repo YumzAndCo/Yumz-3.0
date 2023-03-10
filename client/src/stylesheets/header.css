@@ -1,4 +1,14 @@
 .header {
-  margin-bottom: 200px;
-  text-align: center;
+  /* margin-bottom: 200px; */
+  margin-top: 170px;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  width: 100vw
+}
+
+#logo{
+  height: 700px;
+  width: 700px;
+  margin-left: -3rem;
 }

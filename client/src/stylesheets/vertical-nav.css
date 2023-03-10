@@ -9,6 +9,7 @@
   align-items: flex-start;
   gap: 2rem;
   background-color: #352d39;
+  border-right: 2px #352d39 ridge ;
 }
 
 .vertical-nav-btn {
